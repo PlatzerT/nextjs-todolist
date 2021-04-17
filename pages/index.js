@@ -1,53 +1,14 @@
-import Head from 'next/head';
-import { useState } from 'react';
-import TodoList from '../components/TodoList';
+import Link from 'next/link';
 
 export default function Home() {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [todoList, setTodoList] = useState([]);
-
-  function createTodo(e) {
-    e.preventDefault();
-    setTodoList((oldTodoList) => [...oldTodoList, { name, description }]);
-
-    setName('');
-    setDescription('');
-    console.log(todoList);
-  }
-
   return (
-    <div className="my-5">
-      <form onSubmit={createTodo} className="flex flex-row justify-around">
-        <label>
-          Name<br></br>
-          <input
-            type="text"
-            value={name}
-            className="bg-purple-100"
-            onChange={(e) => setName(e.target.value)}
-          ></input>
-        </label>
-        <label>
-          Description<br></br>
-          <input
-            type="text"
-            value={description}
-            className="bg-purple-100"
-            onChange={(e) => setDescription(e.target.value)}
-          ></input>
-        </label>
-
-        <button
-          type="submit"
-          className="border border-gray-400 px-4 hover:bg-purple-700 hover:border-transparent hover:text-white transistion duration-75 ease-in-out"
-        >
-          +
+    <div className="flex flex-col space-y-8 text-center">
+      <h1 className="text-4xl">Welcome to this Website!</h1>
+      <Link href="/todos">
+        <button className="self-center border border-transparent bg-purple-700 text-white py-2 px-4 rounded-md hover:border-purple-700 hover:bg-white hover:text-black transition duration-75 ease-in-out">
+          Create Todos
         </button>
-      </form>
-      <ul>
-        <TodoList todoList={todoList} />
-      </ul>
+      </Link>
     </div>
   );
 }
