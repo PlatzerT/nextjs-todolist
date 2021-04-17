@@ -21,29 +21,34 @@ export default function TodoPage() {
   }
   return (
     <div className="my-5">
-      <form onSubmit={createTodo} className="flex flex-row justify-between">
-        <label>
-          Name<br></br>
-          <input
-            type="text"
-            value={name}
-            className="bg-purple-100"
-            onChange={(e) => setName(e.target.value)}
-          ></input>
-        </label>
-        <label>
-          Description<br></br>
-          <input
-            type="text"
-            value={description}
-            className="bg-purple-100"
-            onChange={(e) => setDescription(e.target.value)}
-          ></input>
-        </label>
+      <form
+        onSubmit={createTodo}
+        className="flex flex-row justify-between content-center"
+      >
+        <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+          <label>
+            Name<br></br>
+            <input
+              type="text"
+              value={name}
+              className="bg-purple-100"
+              onChange={(e) => setName(e.target.value)}
+            ></input>
+          </label>
+          <label>
+            Description<br></br>
+            <input
+              type="text"
+              value={description}
+              className="bg-purple-100"
+              onChange={(e) => setDescription(e.target.value)}
+            ></input>
+          </label>
+        </div>
 
         <button
           type="submit"
-          className="border border-gray-400 px-4 hover:bg-purple-700 hover:border-transparent hover:text-white transistion duration-75 ease-in-out"
+          className="self-center h-12 border border-gray-400 px-4 hover:bg-purple-700 hover:border-transparent hover:text-white transistion duration-75 ease-in-out"
         >
           +
         </button>
