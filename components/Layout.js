@@ -1,6 +1,6 @@
 export default function Layout({ children }) {
   return (
-    <div className="container max-w-xs sm:max-w-screen-md mx-auto mt-8">
+    <div className="max-w-xs sm:max-w-screen-sm md:max-w-screen-5/6 mx-auto mt-8">
       {children}
     </div>
   );
