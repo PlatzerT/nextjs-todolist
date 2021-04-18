@@ -11,6 +11,7 @@ export default function TodoPage() {
     setTodoList((oldTodoList) => [...oldTodoList, { name, description }]);
     setName('');
     setDescription('');
+    //test
   }
 
   function removeTodo(index) {
