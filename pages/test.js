@@ -25,7 +25,6 @@ export default function test(props) {
   const [todos, loading, error] = useCollection(ref, {
     snapshotListenOptions: { includeMetadataChanges: true },
   });
-  console.log(props.todos);
   return (
     <div>
       {!loading
