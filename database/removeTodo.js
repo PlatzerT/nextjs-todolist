@@ -1,11 +1,9 @@
 import { db } from '../firebase/initFirebase';
 
-export default function createTodo(data) {
+export default function removeTodo(id) {
   db.collection('/todos')
-    .add({
-      ...data,
-      isComplete: false,
-    })
+    .doc(`${id}`)
+    .delete()
     .catch((err) => {
       console.log(err);
     });
