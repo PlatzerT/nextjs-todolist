@@ -13,7 +13,6 @@ const config = {
 
 if (!firebase.apps.length) {
   firebase.initializeApp(config);
-  console.log('Firebase intitialized!');
 }
 
 const db = firebase.firestore();
