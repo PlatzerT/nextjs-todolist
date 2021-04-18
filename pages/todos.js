@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import Todo from '../components/Todo';
+import createTodo from '../database/createTodo';
 
 export default function TodoPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [todoList, setTodoList] = useState([]);
 
-  function createTodo(e) {
+  function createTodo2(e) {
     e.preventDefault();
     setTodoList((oldTodoList) => [...oldTodoList, { name, description }]);
     setName('');
     setDescription('');
+    createTodo({ name, description });
     //test
   }
 
@@ -23,7 +25,7 @@ export default function TodoPage() {
   return (
     <div className="my-5">
       <form
-        onSubmit={createTodo}
+        onSubmit={createTodo2}
         className="flex flex-row justify-between content-center"
       >
         <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
