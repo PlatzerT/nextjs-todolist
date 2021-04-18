@@ -1,28 +1,35 @@
 import { useState } from 'react';
 import Todo from '../components/Todo';
+import createTodo from '../database/createTodo';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { db } from '../firebase/initFirebase';
+import getTodos from '../database/getTodos';
 
-export default function TodoPage() {
+// Render this
+export async function getStaticProps() {
+  const todos = await getTodos();
+  return {
+    props: { todos },
+  };
+}
+
+export default function TodoPage(props) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [todoList, setTodoList] = useState([]);
 
-  function createTodo(e) {
-    e.preventDefault();
-    setTodoList((oldTodoList) => [...oldTodoList, { name, description }]);
-    setName('');
-    setDescription('');
-  }
+  // Collection reference
+  const ref = db.collection('/todos');
+  const [todos, loading, error] = useCollection(ref, {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
 
-  function removeTodo(index) {
-    setTodoList((oldTodoList) => [
-      ...oldTodoList.slice(0, index),
-      ...oldTodoList.slice(index + 1),
-    ]);
-  }
   return (
     <div className="my-5">
       <form
-        onSubmit={createTodo}
+        onSubmit={(e) => {
+          e.preventDefault();
+          createTodo({ name, description });
+        }}
         className="flex flex-row justify-between content-center"
       >
         <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
@@ -55,29 +62,22 @@ export default function TodoPage() {
       </form>
       <hr className="my-4"></hr>
       <div className="flex mt-6 flex-col space-y-5">
-        {todoList.map((todo, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-row justify-between space-x-8"
-            >
-              <Todo todo={todo} />
-              <button
-                onClick={() => removeTodo(index)}
-                className="h-10 line-height-adjustment self-center border border-transparent p-4 bg-red-700 text-white hover:bg-white hover:border-transparent hover:border-red-700 hover:text-black transistion duration-75 ease-in-out"
-              >
-                -
-              </button>
-            </div>
-          );
-        })}
+        {!loading
+          ? todos.docs.map((todo) => {
+              return (
+                <div key={todo.id}>
+                  <Todo todo={{ ...todo.data(), id: todo.id }} />
+                </div>
+              );
+            })
+          : props.todos.map((todo) => {
+              return (
+                <div key={todo.id}>
+                  <Todo todo={todo} />
+                </div>
+              );
+            })}
       </div>
-
-      <style jsx>{`
-        .line-height-adjustment {
-          line-height: 0;
-        }
-      `}</style>
     </div>
   );
 }
