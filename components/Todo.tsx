@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 import removeTodo from '../database/removeTodo';
@@ -36,7 +37,7 @@ export default function Todo({ todo }) {
   }
 
   return (
-    <div
+    <motion.div
       onClick={() => toggleTodo()}
       className="flex flex-row content-center justify-between flex-grow p-6 space-x-4 transition duration-75 ease-in-out border border-gray-100 shadow-sm cursor-pointer hover:border-gray-600 hover:shadow-md"
     >
@@ -68,7 +69,7 @@ export default function Todo({ todo }) {
             </p>
           ) : (
             <input
-            autoFocus={true}
+              autoFocus={true}
               value={newDescription}
               onBlur={editDescriptionFinished}
               onChange={(e) => setNewDescription(e.target.value)}
@@ -97,6 +98,6 @@ export default function Todo({ todo }) {
           line-height: 0;
         }
       `}</style>
-    </div>
+    </motion.div>
   );
 }

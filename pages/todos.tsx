@@ -2,9 +2,10 @@ import { useState } from 'react';
 import createTodo from '../database/createTodo';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../firebase/initFirebase';
-import getTodos from '../database/getTodos';
 import Todo from '../components/Todo';
 import TodoList from '../components/TodoList';
+import ITodo from '../interfaces/ITodo';
+import getTodos from '../database/getTodos';
 
 // Render this
 export async function getStaticProps() {
@@ -19,14 +20,14 @@ export default function TodoPage(props) {
   const [description, setDescription] = useState('');
   const { initialTodos } = props;
 
-  
-
   return (
     <div className="my-5">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           createTodo({ name, description });
+          setDescription('');
+          setName('');
         }}
         className="flex flex-row content-center justify-between"
       >
@@ -60,8 +61,7 @@ export default function TodoPage(props) {
       </form>
       <hr className="my-4"></hr>
       <div className="flex flex-col mt-6 space-y-5">
-        <TodoList initialTodos={initialTodos}/>
-        
+        <TodoList initialTodos={initialTodos} />
       </div>
     </div>
   );
