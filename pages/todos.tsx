@@ -1,27 +1,25 @@
 import { useState } from 'react';
-import Todo from '../components/Todo';
 import createTodo from '../database/createTodo';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../firebase/initFirebase';
 import getTodos from '../database/getTodos';
+import Todo from '../components/Todo';
+import TodoList from '../components/TodoList';
 
 // Render this
 export async function getStaticProps() {
-  const todos = await getTodos();
+  const initialTodos = await getTodos();
   return {
-    props: { todos },
+    props: { initialTodos },
   };
 }
 
 export default function TodoPage(props) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const { initialTodos } = props;
 
-  // Collection reference
-  const ref = db.collection('/todos');
-  const [todos, loading, error] = useCollection(ref, {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
+  
 
   return (
     <div className="my-5">
@@ -62,21 +60,8 @@ export default function TodoPage(props) {
       </form>
       <hr className="my-4"></hr>
       <div className="flex flex-col mt-6 space-y-5">
-        {!loading
-          ? todos.docs.map((todo) => {
-              return (
-                <div key={todo.id}>
-                  <Todo todo={{ ...todo.data(), id: todo.id }} />
-                </div>
-              );
-            })
-          : props.todos.map((todo) => {
-              return (
-                <div key={todo.id}>
-                  <Todo todo={todo} />
-                </div>
-              );
-            })}
+        <TodoList initialTodos={initialTodos}/>
+        
       </div>
     </div>
   );

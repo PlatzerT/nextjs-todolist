@@ -51,7 +51,7 @@ export default function Todo({ todo }) {
             </h2>
           ) : (
             <input
-              autoFocus="true"
+              autoFocus={true}
               value={newName}
               onBlur={editNameFinished}
               onChange={(e) => setNewName(e.target.value)}
@@ -68,7 +68,7 @@ export default function Todo({ todo }) {
             </p>
           ) : (
             <input
-              autoFocus="true"
+            autoFocus={true}
               value={newDescription}
               onBlur={editDescriptionFinished}
               onChange={(e) => setNewDescription(e.target.value)}
