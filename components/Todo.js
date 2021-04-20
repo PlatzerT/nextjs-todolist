@@ -38,10 +38,10 @@ export default function Todo({ todo }) {
   return (
     <div
       onClick={() => toggleTodo()}
-      className="flex flex-row space-x-4 justify-between flex-grow content-center border border-gray-100 shadow-sm p-6 hover:border-gray-600 hover:shadow-md transition duration-75 ease-in-out cursor-pointer"
+      className="flex flex-row content-center justify-between flex-grow p-6 space-x-4 transition duration-75 ease-in-out border border-gray-100 shadow-sm cursor-pointer hover:border-gray-600 hover:shadow-md"
     >
-      <div className="flex flex-row space-x-4 justify-between flex-grow content-center">
-        <div className="self-center w-24 sm:w-60 md:w-60 break-words">
+      <div className="flex flex-row content-center justify-between flex-grow space-x-4">
+        <div className="self-center w-24 break-words sm:w-60 md:w-60">
           {!editName ? (
             <h2
               onClick={editNameFunc}
@@ -62,7 +62,7 @@ export default function Todo({ todo }) {
           {!editDescription ? (
             <p
               onClick={editDescriptionFunc}
-              className="text-purple-400 mt-2 hover:bg-gray-100"
+              className="mt-2 text-purple-400 hover:bg-gray-100"
             >
               {description}
             </p>
@@ -72,12 +72,12 @@ export default function Todo({ todo }) {
               value={newDescription}
               onBlur={editDescriptionFinished}
               onChange={(e) => setNewDescription(e.target.value)}
-              className="text-purple-400 mt-2"
+              className="mt-2 text-purple-400"
             ></input>
           )}
         </div>
         <p
-          className="text-xs bg-green-500 text-white font-bold self-center p-1"
+          className="self-center p-1 text-xs font-bold text-white bg-green-500"
           style={{ visibility: isComplete ? 'visible' : 'hidden' }}
         >
           COMPLETE
@@ -88,7 +88,7 @@ export default function Todo({ todo }) {
           e.stopPropagation();
           removeTodo(id);
         }}
-        className="h-10 line-height-adjustment self-center border border-transparent p-4 bg-red-700 text-white hover:bg-white hover:border-transparent hover:border-red-700 hover:text-black transistion duration-75 ease-in-out"
+        className="self-center h-10 p-4 text-white duration-75 ease-in-out bg-red-700 border border-transparent line-height-adjustment hover:bg-white hover:border-transparent hover:border-red-700 hover:text-black transistion"
       >
         -
       </button>

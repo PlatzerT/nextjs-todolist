@@ -30,7 +30,7 @@ export default function TodoPage(props) {
           e.preventDefault();
           createTodo({ name, description });
         }}
-        className="flex flex-row justify-between content-center"
+        className="flex flex-row content-center justify-between"
       >
         <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
           <label>
@@ -55,13 +55,13 @@ export default function TodoPage(props) {
 
         <button
           type="submit"
-          className="self-center h-12 border border-gray-400 px-4 hover:bg-purple-700 hover:border-transparent hover:text-white transistion duration-75 ease-in-out"
+          className="self-center h-12 px-4 duration-75 ease-in-out border border-gray-400 hover:bg-purple-700 hover:border-transparent hover:text-white transistion"
         >
           +
         </button>
       </form>
       <hr className="my-4"></hr>
-      <div className="flex mt-6 flex-col space-y-5">
+      <div className="flex flex-col mt-6 space-y-5">
         {!loading
           ? todos.docs.map((todo) => {
               return (
